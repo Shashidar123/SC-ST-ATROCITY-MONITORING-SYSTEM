@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Welfare Dashboard - Atrocity Murder Cases</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .stats-card {
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .dt-buttons {
+            margin-bottom: 1rem;
+        }
+        .priority-high {
+            background-color: #ffdddd !important;
+        }
+        .priority-medium {
+            background-color: #fff3cd !important;
+        }
+        .badge-case-new {
+            background-color: #0d6efd;
+        }
+        .badge-case-pending {
+            background-color: #fd7e14;
+        }
+        .badge-case-verified {
+            background-color: #198754;
+        }
+        .badge-case-rejected {
+            background-color: #dc3545;
+        }
+        .badge-case-compensated {
+            background-color: #6f42c1;
+        }
+        .beneficiary-photo {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #dee2e6;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #0d6efd;
+            border: 2px solid white;
+        }
+        .timeline-item.rejected::before {
+            background-color: #dc3545;
+        }
+        .timeline-item.verified::before {
+            background-color: #198754;
+        }
+        .timeline-item.compensated::before {
+            background-color: #6f42c1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Social Welfare Department - Atrocity Murder Cases</h1>
+        <a href="/logout" class="btn btn-danger logout-btn">Logout</a>
+
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card stats-card bg-primary text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Cases</h5>
+                        <h3 id="total-count" class="card-text">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card bg-info text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Pending Verification</h5>
+                        <h3 id="pending-count" class="card-text">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card bg-success text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Verified Cases</h5>
+                        <h3 id="verified-count" class="card-text">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card bg-purple text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Compensated</h5>
+                        <h3 id="compensated-count" class="card-text">0</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="mb-0">Case Overview</h3>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#filterModal">
+                            <i class="bi bi-funnel"></i> Filter Cases
+                        </button>
+                        <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#assignBenefitModal">
+                            <i class="bi bi-person-plus"></i> Assign Benefit
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="casesTable" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Case ID</th>
+                            <th>FIR No.</th>
+                            <th>Victim Name</th>
+                            <th>Victim Caste</th>
+                            <th>Incident Date</th>
+                            <th>Location</th>
+                            <th>Beneficiaries</th>
+                            <th>Compensation Amount</th>
+                            <th>Status</th>
+                            <th>Last Updated</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <h5>Case Status Distribution</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="statusChart" height="250"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <h5>Compensation by Caste</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="casteChart" height="250"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="verificationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Verify Case Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="verificationCaseId">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <h5>Case Details</h5>
+                            <p><strong>Case ID:</strong> <span id="verificationCaseIdDisplay"></span></p>
+                            <p><strong>FIR No.:</strong> <span id="verificationFirNo"></span></p>
+                            <p><strong>Incident Date:</strong> <span id="verificationIncidentDate"></span></p>
+                            <p><strong>Location:</strong> <span id="verificationLocation"></span></p>
+                            <p><strong>Victim Caste:</strong> <span id="verificationCaste"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Victim Details</h5>
+                            <p><strong>Name:</strong> <span id="verificationVictimName"></span></p>
+                            <p><strong>Age:</strong> <span id="verificationVictimAge"></span></p>
+                            <p><strong>Gender:</strong> <span id="verificationVictimGender"></span></p>
+                            <p><strong>Address:</strong> <span id="verificationVictimAddress"></span></p>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="verificationStatus" class="form-label">Verification Status</label>
+                        <select class="form-select" id="verificationStatus">
+                            <option value="pending">Pending Verification</option>
+                            <option value="verified">Verified - Eligible for Compensation</option>
+                            <option value="rejected">Rejected - Not Eligible</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="verificationRemarks" class="form-label">Verification Remarks</label>
+                        <textarea class="form-control" id="verificationRemarks" rows="3" placeholder="Enter verification details or reasons for rejection"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="verificationDocuments" class="form-label">Upload Verification Report</label>
+                        <input type="file" class="form-control" id="verificationDocuments">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitVerificationBtn">Submit Verification</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="assignBenefitModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Assign Compensation to Beneficiary</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="benefitCaseSelect" class="form-label">Select Case</label>
+                        <select class="form-select" id="benefitCaseSelect">
+                            <option value="">-- Select a verified case --</option>
+                            </select>
+                    </div>
+
+                    <div id="beneficiarySection" style="display: none;">
+                        <h5 class="mt-4">Beneficiary Details</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="beneficiaryName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="beneficiaryName">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="beneficiaryRelation" class="form-label">Relationship to Victim</label>
+                                    <input type="text" class="form-control" id="beneficiaryRelation">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="beneficiaryAge" class="form-label">Age</label>
+                                    <input type="number" class="form-control" id="beneficiaryAge">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="beneficiaryGender" class="form-label">Gender</label>
+                                    <select class="form-select" id="beneficiaryGender">
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="beneficiaryAadhar" class="form-label">Aadhar Number</label>
+                                    <input type="text" class="form-control" id="beneficiaryAadhar">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="beneficiaryContact" class="form-label">Contact Number</label>
+                                    <input type="text" class="form-control" id="beneficiaryContact">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="beneficiaryPhoto" class="form-label">Photograph</label>
+                                    <input type="file" class="form-control" id="beneficiaryPhoto" accept="image/*">
+                                    <div class="mt-2 text-center">
+                                        <img id="beneficiaryPhotoPreview" src="https://via.placeholder.com/100" alt="Photo Preview" class="beneficiary-photo">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="beneficiaryAddress" class="form-label">Address</label>
+                                    <textarea class="form-control" id="beneficiaryAddress" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4">Compensation Details</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="compensationAmount" class="form-label">Amount (₹)</label>
+                                    <input type="number" class="form-control" id="compensationAmount">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="compensationType" class="form-label">Type</label>
+                                    <select class="form-select" id="compensationType">
+                                        <option value="financial">Financial Compensation</option>
+                                        <option value="housing">Housing Assistance</option>
+                                        <option value="employment">Employment Assistance</option>
+                                        <option value="education">Education Assistance</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="compensationDate" class="form-label">Disbursement Date</label>
+                                    <input type="date" class="form-control" id="compensationDate">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="compensationRemarks" class="form-label">Remarks</label>
+                            <textarea class="form-control" id="compensationRemarks" rows="2" placeholder="Any additional details about the compensation"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="compensationDocuments" class="form-label">Upload Supporting Documents</label>
+                            <input type="file" class="form-control" id="compensationDocuments" multiple>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="assignBenefitBtn">Assign Compensation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Case Details & Beneficiary Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="caseDetailsContent">
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="filterModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class

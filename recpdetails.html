@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Welfare Department | SC/ST Victim Compensation</title>
+    <style>
+        :root {
+            --police-blue: #0a4a7a;
+            --police-dark-blue: #08315a;
+            --police-light: #e9f2f9;
+            --police-white: #ffffff;
+            --police-dark: #333333;
+            --police-gray: #e0e0e0;
+            --collector-green: #2e7d32;
+            --dcr-purple: #6a1b9a;
+            --io-orange: #ff6d00;
+            --welfare-teal: #00897b;
+            --welfare-light-teal: #e0f2f1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--police-light);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--welfare-teal), var(--police-blue));
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .badge {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--welfare-teal);
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid gold;
+        }
+
+        .header-actions button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Main Layout */
+        .container {
+            display: flex;
+            min-height: calc(100vh - 82px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            padding: 1.5rem;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--police-dark);
+            text-decoration: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: var(--welfare-light-teal);
+            color: var(--welfare-teal);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .case-id {
+            background-color: var(--welfare-teal);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        /* Form Sections */
+        .form-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--welfare-teal);
+        }
+
+        .section-title {
+            color: var(--welfare-teal);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--police-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Form Grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--police-dark);
+        }
+
+        .form-group label.required:after {
+            content: " *";
+            color: red;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--police-gray);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        /* File Upload */
+        .file-upload {
+            border: 2px dashed var(--police-gray);
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--welfare-teal);
+            background-color: var(--welfare-light-teal);
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .file-upload label {
+            cursor: pointer;
+            color: var(--welfare-teal);
+            font-weight: 600;
+            display: block;
+        }
+
+        .file-name {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Status Indicator */
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .status-pending {
+            background-color: #f39c12;
+        }
+
+        .status-saved {
+            background-color: #2ecc71;
+        }
+
+        /* Action Buttons */
+        .form-actions {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--welfare-teal);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--police-blue);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* Success Modal */
+        .evidence-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-title">
+            <div class="badge">SW</div>
+            <div>
+                <h1>Social Welfare Department</h1>
+                <p>SC/ST Victim Compensation Portal</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-hand-holding-heart"></i> Compensation Cases</a></li>
+                <li><a href="#"><i class="fas fa-file-upload"></i> Applications</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Case Header -->
+            <div class="case-header">
+                <h2>Compensation Application</h2>
+                <div class="case-id">App ID: SW/COMP/2023/0145</div>
+            </div>
+
+            <form id="compensationForm" action="save_recipient.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="case_id" name="case_id" value="">
+                <!-- Victim Information Section -->
+                <div class="form-section">
+                    <h3 class="section-title">
+                        <span class="status-indicator status-pending"></span>
+                        Victim Information
+                    </h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="victimName" class="required">Full Name of Victim</label>
+                            <input type="text" id="victimName" name="victimName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="victimAge">Age at time of incident</label>
+                            <input type="number" id="victimAge" name="victimAge" min="1" max="120">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="victimGender">Gender</label>
+                            <select id="victimGender" name="victimGender">
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="incidentDate" class="required">Date of Incident</label>
+                            <input type="date" id="incidentDate" name="incidentDate" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="incidentDetails">Incident Details</label>
+                            <textarea id="incidentDetails" name="incidentDetails"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recipient Information Section -->
+                <div class="form-section">
+                    <h3 class="section-title">
+                        <span class="status-indicator status-pending"></span>
+                        Recipient Information
+                    </h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="recipientName" class="required">Full Name of Recipient</label>
+                            <input type="text" id="recipientName" name="recipientName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="relationship" class="required">Relationship to Victim</label>
+                            <select id="relationship" name="relationship" required>
+                                <option value="">Select</option>
+                                <option value="spouse">Spouse</option>
+                                <option value="parent">Father</option>
+                                <option value="parent">Mother</option>
+                                <option value="child">Son</option>
+                                <option value="child">Daughter</option>
+                                <option value="sibling">Sibling</option>
+                                <option value="other">Other Relative</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="recipientAge" class="required">Age</label>
+                            <input type="number" id="recipientAge" name="recipientAge" min="18" max="120" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="recipientGender">Gender</label>
+                            <select id="recipientGender" name="recipientGender">
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address" class="required">Full Address</label>
+                            <textarea id="address" name="address" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactNumber" class="required">Contact Number</label>
+                            <input type="text" id="contactNumber" name="contactNumber" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Document Upload Section -->
+                <div class="form-section">
+                    <h3 class="section-title">
+                        <span class="status-indicator status-pending"></span>
+                        Required Documents
+                    </h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>FIR Copy</label>
+                            <div class="file-upload">
+                                <input type="file" id="firCopy" name="firCopy" accept=".pdf,.jpg,.jpeg,.png">
+                                <label for="firCopy">Click to upload FIR copy</label>
+                                <div class="file-name" id="firCopyName">No file chosen</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="required">Death Certificate</label>
+                            <div class="file-upload">
+                                <input type="file" id="deathCertificate" name="deathCertificate" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <label for="deathCertificate">Click to upload Death Certificate</label>
+                                <div class="file-name" id="deathCertificateName">No file chosen</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="required">Aadhar Card</label>
+                            <div class="file-upload">
+                                <input type="file" id="aadharCard" name="aadharCard" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <label for="aadharCard">Click to upload Aadhar Card</label>
+                                <div class="file-name" id="aadharCardName">No file chosen</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="required">Social Status Report (issued by RDO)</label>
+                            <div class="file-upload">
+                                <input type="file" id="socialStatusReport" name="socialStatusReport" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <label for="socialStatusReport">Click to upload Social Status Report</label>
+                                <div class="file-name" id="socialStatusReportName">No file chosen</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Charge Sheet</label>
+                            <div class="file-upload">
+                                <input type="file" id="chargeSheet" name="chargeSheet" accept=".pdf,.jpg,.jpeg,.png">
+                                <label for="chargeSheet">Click to upload Charge Sheet</label>
+                                <div class="file-name" id="chargeSheetName">No file chosen</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="required">Postmortem Report</label>
+                            <div class="file-upload">
+                                <input type="file" id="postmortemReport" name="postmortemReport" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <label for="postmortemReport">Click to upload Postmortem Report</label>
+                                <div class="file-name" id="postmortemReportName">No file chosen</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="required">Legal Heir Certificate (issued by RDO)</label>
+                            <div class="file-upload">
+                                <input type="file" id="legalHeirCertificate" name="legalHeirCertificate" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <label for="legalHeirCertificate">Click to upload Legal Heir Certificate</label>
+                                <div class="file-name" id="legalHeirCertificateName">No file chosen</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="required">Caste Certificate</label>
+                            <div class="file-upload">
+                                <input type="file" id="casteCertificate" name="casteCertificate" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <label for="casteCertificate">Click to upload Caste Certificate</label>
+                                <div class="file-name" id="casteCertificateName">No file chosen</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Compensation Details Section -->
+                <div class="form-section">
+                    <h3 class="section-title">
+                        <span class="status-indicator status-pending"></span>
+                        Compensation & Rehabilitation Details
+                    </h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="educationQualification">Education Qualification</label>
+                            <select id="educationQualification" name="educationQualification">
+                                <option value="">Select</option>
+                                <option value="illiterate">Illiterate</option>
+                                <option value="primary">Primary School</option>
+                                <option value="secondary">Secondary School</option>
+                                <option value="higher_secondary">Higher Secondary</option>
+                                <option value="graduate">Graduate</option>
+                                <option value="post_graduate">Post Graduate</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="jobAssigned">Job Assigned (if any)</label>
+                            <select id="jobAssigned" name="jobAssigned">
+                                <option value="">Select</option>
+                                <option value="not assigned">Not Assigned</option>
+                                <option value="junior assistant">Junior Assistant</option>
+                                <option value="worker">Worker</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="appointmentOrder">Appointment Order (if applicable)</label>
+                            <div class="file-upload">
+                                <input type="file" id="appointmentOrder" name="appointmentOrder" accept=".pdf,.jpg,.jpeg,.png">
+                                <label for="appointmentOrder">Click to upload Appointment Order</label>
+                                <div class="file-name" id="appointmentOrderName">No file chosen</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bankName">Bank Name</label>
+                            <input type="text" id="bankName" name="bankName">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="accountNumber">Bank Account Number</label>
+                            <input type="text" id="accountNumber" name="accountNumber">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="ifscCode">IFSC Code</label>
+                            <input type="text" id="ifscCode" name="ifscCode">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="compensationAmount">Compensation Amount (₹)</label>
+                            <select id="compensationAmount" name="compensationAmount">
+                                <option value="">Select</option>
+                                <option value="not assigned">Not Assigned</option>
+                                <option value="partially assigned">Partially Assigned (₹4,12,500)</option>
+                                <option value="fully assigned">Fully Assigned (₹8,25,000)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="saveDraftBtn">
+                        <i class="fas fa-save"></i> Save Draft
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> Submit Application
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="evidence-modal" id="successModal">
+        <div class="modal-content">
+            <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--collector-green); margin-bottom: 1rem;"></i>
+            <h3>Application Submitted Successfully</h3>
+            <p>Your compensation application has been submitted and will be processed shortly.</p>
+            <button class="btn btn-primary" id="closeSuccessModal" style="margin-top: 1.5rem;">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Extract case_id from URL and set it in the hidden field
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const caseId = urlParams.get('case_id');
+            if (caseId) {
+                document.getElementById('case_id').value = caseId;
+            }
+        });
+
+        // Display file names when files are selected
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+                const nameElement = document.getElementById(this.id + 'Name');
+                if (nameElement) {
+                    nameElement.textContent = fileName;
+                }
+            });
+        });
+        
+        // Form submission handling
+        document.getElementById('compensationForm').addEventListener('submit', function(e) {
+            // Don't prevent default - let the form submit naturally
+            // e.preventDefault(); - Remove this line
+            
+            // Validate form
+            const requiredFields = document.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    field.style.borderColor = 'red';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '';
+                }
+            });
+            
+            if (!isValid) {
+                alert('Please fill all required fields marked with *');
+                e.preventDefault(); // Only prevent submission if validation fails
+                return;
+            }
+        });
+        
+        // Save draft functionality
+        document.getElementById('saveDraftBtn').addEventListener('click', function() {
+            // Add hidden field for draft
+            let draftInput = document.createElement('input');
+            draftInput.type = 'hidden';
+            draftInput.name = 'save_draft';
+            draftInput.value = '1';
+            document.getElementById('compensationForm').appendChild(draftInput);
+            
+            // Submit the form
+            document.getElementById('compensationForm').submit();
+        });
+        
+        // Close success modal
+        document.getElementById('closeSuccessModal').addEventListener('click', function() {
+            document.getElementById('successModal').style.display = 'none';
+        });
+        
+        // Close modal if clicked outside
+        window.addEventListener('click', function(e) {
+            if (e.target === document.getElementById('successModal')) {
+                document.getElementById('successModal').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

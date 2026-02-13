@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collector Office | SC/ST Atrocity Case Review</title>
+    <style>
+        :root {
+            --collector-green: #2e7d32;
+            --collector-dark-green: #1b5e20;
+            --collector-light: #e8f5e9;
+            --collector-white: #ffffff;
+            --collector-dark: #333333;
+            --collector-gray: #e0e0e0;
+            --police-blue: #0a4a7a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--collector-light);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--collector-dark-green), var(--collector-green));
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .badge {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--collector-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid gold;
+        }
+
+        .header-actions button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Main Layout */
+        .container {
+            display: flex;
+            min-height: calc(100vh - 82px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            padding: 1.5rem;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--collector-dark);
+            text-decoration: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: var(--collector-light);
+            color: var(--collector-green);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .case-id {
+            background-color: var(--collector-green);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        /* Case Sections */
+        .case-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: var(--collector-green);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--collector-gray);
+        }
+
+        /* Detail Cards */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .detail-card {
+            background-color: var(--collector-light);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .detail-row {
+            display: flex;
+            margin-bottom: 0.8rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            width: 150px;
+            color: var(--collector-dark);
+        }
+
+        .detail-value {
+            flex: 1;
+        }
+
+        /* Evidence Grid */
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .evidence-item {
+            border: 1px solid var(--collector-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .evidence-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .evidence-doc {
+            width: 100%;
+            height: 150px;
+            background-color: var(--collector-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--collector-green);
+        }
+
+        .evidence-caption {
+            padding: 0.5rem;
+            text-align: center;
+            background-color: var(--collector-gray);
+        }
+
+        /* Compensation Section */
+        .compensation-section {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group select, 
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--collector-gray);
+            border-radius: 4px;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--collector-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--collector-dark-green);
+        }
+
+        .btn-secondary {
+            background-color: var(--police-blue);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #08315a;
+        }
+
+        /* SP Section */
+        .sp-section {
+            background-color: #e9f2f9;
+            border-left: 4px solid var(--police-blue);
+        }
+
+        .sp-title {
+            color: var(--police-blue);
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+
+        .status-active {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .status-completed {
+            background-color: #e8f5e9;
+            color: var(--collector-green);
+        }
+
+        /* Compensation Table */
+        .compensation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .compensation-table th, 
+        .compensation-table td {
+            padding: 0.8rem;
+            border: 1px solid var(--collector-gray);
+            text-align: left;
+        }
+
+        .compensation-table th {
+            background-color: var(--collector-green);
+            color: white;
+        }
+
+        .compensation-table tr:nth-child(even) {
+            background-color: var(--collector-light);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-title">
+            <div class="badge">CO</div>
+            <div>
+                <h1>Collector Office Dashboard</h1>
+                <p>SC/ST Atrocity Case Management System</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="user-profile">
+                <h3>Collector Vinod Mehta</h3>
+                <p>District: Krishna Nagar</p>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-list"></i> Pending Cases</a></li>
+                <li><a href="#"><i class="fas fa-rupee-sign"></i> Compensation</a></li>
+                <li><a href="#"><i class="fas fa-file-export"></i> Reports</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Case Header -->
+            <div class="case-header">
+                <h2>Case Review & Compensation</h2>
+                <div class="case-id">Case ID: SCST/2023/0145</div>
+            </div>
+
+            <!-- Case Information -->
+            <div class="case-section">
+                <h3 class="section-title">Case Summary</h3>
+                <div class="detail-grid">
+                    <div class="detail-card">
+                        <div class="detail-row">
+                            <div class="detail-label">FIR Number:</div>
+                            <div class="detail-value">FIR-125/2023</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Police Station:</div>
+                            <div class="detail-value">Krishna Nagar South</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">SP Remarks:</div>
+                            <div class="detail-value">"Strong evidence case. Request expedited compensation."</div>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-row">
+                            <div class="detail-label">Current Status:</div>
+                            <div class="detail-value">
+                                <span class="status-badge status-active">Pending Compensation</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Hearing Date:</div>
+                            <div class="detail-value">25-11-2023</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Victim Details -->
+            <div class="case-section">
+                <h3 class="section-title">Victim Details</h3>
+                <div class="detail-grid">
+                    <div class="detail-card">
+                        <div class="detail-row">
+                            <div class="detail-label">Full Name:</div>
+                            <div class="detail-value">Suresh Kumar</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Caste:</div>
+                            <div class="detail-value">Scheduled Caste (SC)</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Bank Details:</div>
+                            <div class="detail-value">SBI A/C XXXX-7890 (Verified)</div>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-row">
+                            <div class="detail-label">Injury Severity:</div>
+                            <div class="detail-value">Moderate (2 weeks hospitalization)</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Economic Loss:</div>
+                            <div class="detail-value">Approx. ₹15,000 (Medical + Wages)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SP Office Section -->
+            <div class="case-section sp-section">
+                <h3 class="section-title sp-title">SP Office Submission</h3>
+                <div class="detail-card">
+                    <div class="detail-row">
+                        <div class="detail-label">Evidence Status:</div>
+                        <div class="detail-value">Partially Verified (CCTV pending)</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Recommended Compensation:</div>
+                        <div class="detail-value">As per GOMS 95 Category B (Moderate Injury)</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">SP Comments:</div>
+                        <div class="detail-value">"Victim suffered caste-based abuse and physical assault. Medical reports confirm injuries. Request maximum compensation under rules."</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compensation Section -->
+            <div class="case-section compensation-section">
+                <h3 class="section-title">Compensation Approval (GOMS 95)</h3>
+                
+                <table class="compensation-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>GOMS 95 Clause</th>
+                            <th>Standard Amount</th>
+                            <th>Proposed Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Medical Expenses</td>
+                            <td>Clause 5(a)</td>
+                            <td>₹25,000</td>
+                            <td>
+                                <input type="number" value="25000" min="0" max="50000">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Physical Injury</td>
+                            <td>Clause 7(b) - Moderate</td>
+                            <td>₹50,000</td>
+                            <td>
+                                <input type="number" value="50000" min="0" max="100000">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mental Trauma</td>
+                            <td>Clause 8</td>
+                            <td>₹25,000</td>
+                            <td>
+                                <input type="number" value="25000" min="0" max="50000">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Loss of Wages</td>
+                            <td>Clause 10</td>
+                            <td>₹15,000</td>
+                            <td>
+                                <input type="number" value="15000" min="0" max="30000">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td></td>
+                            <td><strong>₹1,15,000</strong></td>
+                            <td><strong>₹1,15,000</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="form-group" style="margin-top: 2rem;">
+                    <label>Additional Compensation (If any)</label>
+                    <input type="number" placeholder="Enter additional amount" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Mode</label>
+                    <select>
+                        <option value="direct">Direct Bank Transfer (DBT)</option>
+                        <option value="cheque">Cheque</option>
+                        <option value="cash">Cash (Special Case)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Collector Remarks</label>
+                    <textarea placeholder="Enter official remarks for this compensation...">Approved ₹1,15,000 as per GOMS 95 Clause 5(a), 7(b), 8, and 10 for medical expenses, physical injury, mental trauma, and loss of wages. Case meets all criteria for immediate disbursement.</textarea>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary"><i class="fas fa-save"></i> Save Draft</button>
+                    <button class="btn btn-primary"><i class="fas fa-check-circle"></i> Approve Compensation</button>
+                </div>
+            </div>
+
+            <!-- Final Approval Section -->
+            <div class="case-section">
+                <h3 class="section-title">Final Approval</h3>
+                <div class="detail-card">
+                    <div class="detail-row">
+                        <div class="detail-label">Approval Authority:</div>
+                        <div class="detail-value">District Collector (Krishna Nagar)</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Digital Signature:</div>
+                        <div class="detail-value">
+                            <button class="btn btn-primary" style="width: auto;">
+                                <i class="fas fa-signature"></i> Add Digital Signature
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="margin-top: 1rem;">
+                    <i class="fas fa-paper-plane"></i> Submit to State SC/ST Commission
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Calculate total compensation dynamically
+            const inputs = document.querySelectorAll('.compensation-table input');
+            inputs.forEach(input => {
+                input.addEventListener('change', updateTotal);
+            });
+
+            function updateTotal() {
+                let total = 0;
+                inputs.forEach(input => {
+                    total += parseInt(input.value) || 0;
+                });
+                document.querySelector('.compensation-table tr:last-child td:last-child').textContent = `₹${total.toLocaleString('en-IN')}`;
+            }
+
+            // Approve Compensation button
+            const approveBtn = document.querySelector('.compensation-section .btn-primary');
+            approveBtn.addEventListener('click', function() {
+                if(confirm('Are you sure you want to approve this compensation? This will initiate DBT to victim.')) {
+                    alert('Compensation approved successfully! Disbursement initiated.');
+                    // In real implementation, would update status in backend
+                }
+            });
+
+            // Submit to Commission button
+            const submitBtn = document.querySelector('.case-section:last-child .btn');
+            submitBtn.addEventListener('click', function() {
+                alert('Case and compensation details submitted to State SC/ST Commission.');
+            });
+        });
+    </script>
+</body>
+</html>

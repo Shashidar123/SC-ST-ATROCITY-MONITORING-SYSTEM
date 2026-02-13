@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SC/ST Case Management Portal</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --secondary: #e53e3e;
+            --accent: #dd6b20;
+            --light: #f7fafc;
+            --gray: #e2e8f0;
+            --dark-gray: #4a5568;
+            --white: #ffffff;
+            --success: #38a169;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background-color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .logo-text span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .language-selector {
+            position: relative;
+            margin-left: 0.5rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.5rem;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: var(--white);
+            border-radius: 0.375rem;
+            box-shadow: var(--shadow-md);
+            padding: 0.5rem 0;
+            min-width: 120px;
+            display: none;
+            z-index: 10;
+        }
+
+        .language-selector:hover .language-dropdown {
+            display: block;
+        }
+
+        .language-dropdown a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .language-dropdown a:hover {
+            background-color: var(--gray);
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: #c53030;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Features */
+        .features {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            color: var(--dark-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--gray);
+            text-align: center;
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(221, 107, 32, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 3rem 2rem;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo img {
+            height: 30px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-logo-text {
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-about p {
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .footer-links h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1.25rem;
+            color: var(--white);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .features-container {
+                flex-wrap: wrap;
+            }
+            
+            .feature-card {
+                min-width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features {
+                padding: 2rem 1rem;
+            }
+            
+            .features-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature-card {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/376px-Emblem_of_India.svg.png" alt="National Emblem">
+                <div class="logo-text">SC/ST <span>Portal</span></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="commission.html">Commissions</a></li>
+                    <li><a href="law.html">Laws</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="language-selector">
+                        <button class="language-btn">🌐 English
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="language-dropdown">
+                            <a href="home.html">English</a>
+                            <a href="homeh.html">हिन्दी</a>
+                            <a href="homet.html">తెలుగు</a>
+                        </div>
+                    </li>
+                    <li><a href="login.php" class="btn btn-primary">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-container">
+            <h1>SC/ST Case Management Portal</h1>
+            <p>A centralized platform for managing cases and ensuring justice for Scheduled Castes and Scheduled Tribes communities</p>
+            <div class="hero-buttons">
+                <a href="login.php" class="btn btn-primary">Login to Dashboard</a>
+                <a href="learnMore.html" class="btn" style="background: var(--white); color: var(--primary);">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="section-title">
+            <h2>Our Services</h2>
+            <p>Comprehensive solutions for SC/ST case management and legal support</p>
+        </div>
+        <div class="features-container">
+            <div class="feature-card">
+                <div class="feature-icon">🧑‍⚖</div>
+                <h3>National Commissions</h3>
+                <p>Access information about constitutional bodies working for the protection of SC/ST rights and welfare</p>
+                <a href="commission.html" class="btn btn-primary">Explore</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📜</div>
+                <h3>Legal Framework</h3>
+                <p>Learn about laws and regulations designed to protect SC/ST communities from discrimination</p>
+                <a href="law.html" class="btn btn-primary">View Laws</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3>Case Filing</h3>
+                <p>Understand the process and criteria for filing SC/ST related cases and grievances</p>
+                <a href="criteria.html" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/376px-Emblem_of_India.svg.png" alt="National Emblem">
+                    <div class="footer-logo-text">SC/ST Portal</div>
+                </div>
+                <p>A government initiative to streamline case management and ensure justice for SC/ST communities across India.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="commission.html">Commissions</a></li>
+                    <li><a href="law.html">Laws & Rights</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="criteria.html">Case Criteria</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="guidelines.html">Guidelines</a></li>
+                    <li><a href="reports.html">Annual Reports</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="contact.html">Help Desk</a></li>
+                    <li><a href="mailto:help@scstportal.gov.in">Email Us</a></li>
+                    <li><a href="tel:+911234567890">Call Support</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SC/ST Case Management Portal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

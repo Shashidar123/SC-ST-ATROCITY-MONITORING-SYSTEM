@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Details | SC/ST Victim Compensation</title>
+    <style>
+        :root {
+            --police-blue: #0a4a7a;
+            --police-dark-blue: #08315a;
+            --police-light: #e9f2f9;
+            --police-white: #ffffff;
+            --police-dark: #333333;
+            --police-gray: #e0e0e0;
+            --collector-green: #2e7d32;
+            --dcr-purple: #6a1b9a;
+            --io-orange: #ff6d00;
+            --welfare-teal: #00897b;
+            --welfare-light-teal: #e0f2f1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--police-light);
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--welfare-teal), var(--police-blue));
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .badge {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--welfare-teal);
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid gold;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .case-id {
+            background-color: var(--welfare-teal);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        /* Details Sections */
+        .details-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--welfare-teal);
+        }
+
+        .section-title {
+            color: var(--welfare-teal);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--police-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Details Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .detail-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--police-dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            color: #555;
+            padding: 0.5rem 0;
+            min-height: 20px;
+            font-size: 1.1rem;
+        }
+
+        .empty-value {
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Document List */
+        .document-list {
+            list-style: none;
+        }
+
+        .document-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .document-icon {
+            margin-right: 0.8rem;
+            color: var(--welfare-teal);
+        }
+
+        .document-name {
+            flex: 1;
+        }
+
+        .document-action {
+            color: var(--police-blue);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--welfare-teal);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--police-blue);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+
+        @media (max-width: 768px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+            .case-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-title">
+            <div class="badge">SW</div>
+            <div>
+                <h1>Social Welfare Department</h1>
+                <p>SC/ST Victim Compensation Portal</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Case Header -->
+        <div class="case-header">
+            <h2>Compensation Application Details</h2>
+            <div class="case-id">App ID: SW/COMP/2023/0145</div>
+        </div>
+
+        <!-- Victim Information Section -->
+        <div class="details-section">
+            <h3 class="section-title">
+                <i class="fas fa-user"></i>
+                Victim Information
+            </h3>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Full Name of Victim</div>
+                    <div class="detail-value">Rajesh Kumar</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Age at time of incident</div>
+                    <div class="detail-value">32 years</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Gender</div>
+                    <div class="detail-value">Male</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Date of Incident</div>
+                    <div class="detail-value">15/06/2023</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Incident Details</div>
+                    <div class="detail-value">The victim was assaulted by a group of individuals on his way back from work. The incident was reported to the local police station immediately.</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recipient Information Section -->
+        <div class="details-section">
+            <h3 class="section-title">
+                <i class="fas fa-users"></i>
+                Recipient Information
+            </h3>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Full Name of Recipient</div>
+                    <div class="detail-value">Sunita Devi</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Relationship to Victim</div>
+                    <div class="detail-value">Spouse</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Age</div>
+                    <div class="detail-value">30 years</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Gender</div>
+                    <div class="detail-value">Female</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Full Address</div>
+                    <div class="detail-value">H.No. 123, SC Colony, Ambedkar Nagar, District - Guntur, Andhra Pradesh - 522001</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Contact Number</div>
+                    <div class="detail-value">9876543210</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Document Upload Section -->
+        <div class="details-section">
+            <h3 class="section-title">
+                <i class="fas fa-file"></i>
+                Submitted Documents
+            </h3>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="detail-label">FIR Copy</div>
+                    <ul class="document-list">
+                        <li class="document-item">
+                            <i class="fas fa-file-pdf document-icon"></i>
+                            <span class="document-name">FIR_Copy_Case123.pdf</span>
+                            <a href="#" class="document-action">View</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Death Certificate</div>
+                    <ul class="document-list">
+                        <li class="document-item">
+                            <i class="fas fa-file-pdf document-icon"></i>
+                            <span class="document-name">Death_Certificate_Rajesh.pdf</span>
+                            <a href="#" class="document-action">View</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Aadhar Card</div>
+                    <ul class="document-list">
+                        <li class="document-item">
+                            <i class="fas fa-file-image document-icon"></i>
+                            <span class="document-name">Aadhar_Front.jpg</span>
+                            <a href="#" class="document-action">View</a>
+                        </li>
+                        <li class="document-item">
+                            <i class="fas fa-file-image document-icon"></i>
+                            <span class="document-name">Aadhar_Back.jpg</span>
+                            <a href="#" class="document-action">View</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Social Status Report (issued by RDO)</div>
+                    <ul class="document-list">
+                        <li class="document-item">
+                            <i class="fas fa-file-pdf document-icon"></i>
+                            <span class="document-name">Social_Status_Report.pdf</span>
+                            <a href="#" class="document-action">View</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Charge Sheet</div>
+                    <ul class="document-list">
+                        <li class="document-item">
+                            <i class="fas fa-file-pdf document-icon"></i>
+                            <span class="document-name">Charge_Sheet_Case123.pdf</span>
+                            <a href="#" class="document-action">View</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Postmortem Report</div>
+                    <ul class="document-list">
+                        <li class="document-item">
+                            <i class="fas fa-file-pdf document-icon"></i>
+                            <span class="document-name">Postmortem_Report.pdf</span>
+                            <a href="#" class="document-action">View</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Legal Heir Certificate (issued by RDO)</div>
+                    <ul class="document-list">
+                        <li class="document-item">
+                            <i class="fas fa-file-pdf document-icon"></i>
+                            <span class="document-name">Legal_Heir_Certificate.pdf</span>
+                            <a href="#" class="document-action">View</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Caste Certificate</div>
+                    <ul class="document-list">
+                        <li class="document-item">
+                            <i class="fas fa-file-pdf document-icon"></i>
+                            <span class="document-name">Caste_Certificate.pdf</span>
+                            <a href="#" class="document-action">View</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Compensation Details Section -->
+        <div class="details-section">
+            <h3 class="section-title">
+                <i class="fas fa-money-bill-wave"></i>
+                Compensation & Rehabilitation Details
+            </h3>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Education Qualification</div>
+                    <div class="detail-value">Higher Secondary</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Job Assigned (if any)</div>
+                    <div class="detail-value">Not Assigned</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Appointment Order</div>
+                    <div class="detail-value empty-value">Not provided</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Bank Name</div>
+                    <div class="detail-value">State Bank of India</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Bank Account Number</div>
+                    <div class="detail-value">XXXXXXXX1234</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">IFSC Code</div>
+                    <div class="detail-value">SBIN0000123</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Compensation Amount (₹)</div>
+                    <div class="detail-value">Not Assigned</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Back Button -->
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Applications
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Social Welfare Department © 2023 | SC/ST Victim Compensation Portal</p>
+    </div>
+
+    <script>
+        // Functionality for document viewing
+        document.querySelectorAll('.document-action').forEach(action => {
+            action.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Document preview would open in a real application');
+            });
+        });
+    </script>
+</body>
+</html>

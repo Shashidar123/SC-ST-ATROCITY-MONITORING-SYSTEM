@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Welfare Department - Victim Compensation Portal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .logo {
+            height: 80px;
+            margin-bottom: 15px;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .file-upload {
+            border: 2px dashed #ccc;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .file-upload input {
+            display: none;
+        }
+        
+        .file-upload label {
+            cursor: pointer;
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        .file-name {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .form-actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .required:after {
+            content: " *";
+            color: red;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .status-saved {
+            background-color: #2ecc71;
+        }
+        
+        .status-pending {
+            background-color: #f39c12;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://via.placeholder.com/300x80?text=Social+Welfare+Dept" alt="Social Welfare Department Logo" class="logo">
+            <h1>social welfare Department</h1>
+            <p>SC/ST Case management system</p>
+        </header>
+        
+        <form id="compensationForm">
+            <!-- Victim Information Section -->
+            <div class="form-section">
+                <h2><span class="status-indicator status-pending"></span>Victim Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="victimName" class="required">Full Name of Victim</label>
+                        <input type="text" id="victimName" name="victimName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="victimAge">Age at time of incident</label>
+                        <input type="number" id="victimAge" name="victimAge" min="1" max="120">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="victimGender">Gender</label>
+                        <select id="victimGender" name="victimGender">
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="incidentDate" class="required">Date of Incident</label>
+                        <input type="date" id="incidentDate" name="incidentDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="incidentDetails" class="required">Incident Details</label>
+                        <textarea id="incidentDetails" name="incidentDetails" rows="3" required></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recipient Information Section -->
+            <div class="form-section">
+                <h2><span class="status-indicator status-pending"></span>Recipient Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="recipientName" class="required">Full Name of Recipient</label>
+                        <input type="text" id="recipientName" name="recipientName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="relationship" class="required">Relationship to Victim</label>
+                        <select id="relationship" name="relationship" required>
+                            <option value="">Select</option>
+                            <option value="spouse">Spouse</option>
+                            <option value="parent">father</option>
+                            <option value="child">mother</option>
+                            <option value="child">son</option>
+                            <option value="child">daughter</option>
+                            <option value="sibling">Sibling</option>
+                            <option value="other">Other Relative</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="recipientAge">Age</label>
+                        <input type="number" id="recipientAge" name="recipientAge" min="18" max="120">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="recipientGender">Gender</label>
+                        <select id="recipientGender" name="recipientGender">
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address" class="required">Full Address</label>
+                        <textarea id="address" name="address" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactNumber" class="required">Contact Number</label>
+                        <input type="text" id="contactNumber" name="contactNumber" required>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Document Upload Section -->
+            <div class="form-section">
+                <h2><span class="status-indicator status-pending"></span>Required Documents</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="required">FIR Copy</label>
+                        <div class="file-upload">
+                            <input type="file" id="firCopy" name="firCopy" accept=".pdf,.jpg,.jpeg,.png" required>
+                            <label for="firCopy">Click to upload FIR copy</label>
+                            <div class="file-name" id="firCopyName">No file chosen</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Death Certificate</label>
+                        <div class="file-upload">
+                            <input type="file" id="deathCertificate" name="deathCertificate" accept=".pdf,.jpg,.jpeg,.png" required>
+                            <label for="deathCertificate">Click to upload Death Certificate</label>
+                            <div class="file-name" id="deathCertificateName">No file chosen</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Aadhar card</label>
+                        <div class="file-upload">
+                            <input type="file" id="Aadhar card" name="Aadhar card" accept=".pdf,.jpg,.jpeg,.png" required>
+                            <label for="Aadhar card">Click to upload Death Certificate</label>
+                            <div class="file-name" id="Aadhar card">No file chosen</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">social status report(issued by RDO)</label>
+                        <div class="file-upload">
+                            <input type="file" id="social status report" name="social status report" accept=".pdf,.jpg,.jpeg,.png" required>
+                            <label for="social status report">Click to upload Death Certificate</label>
+                            <div class="file-name" id="social status report">No file chosen</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Charge Sheet</label>
+                        <div class="file-upload">
+                            <input type="file" id="chargeSheet" name="chargeSheet" accept=".pdf,.jpg,.jpeg,.png">
+                            <label for="chargeSheet">Click to upload Charge Sheet</label>
+                            <div class="file-name" id="chargeSheetName">No file chosen</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Postmortem Report</label>
+                        <div class="file-upload">
+                            <input type="file" id="postmortemReport" name="postmortemReport" accept=".pdf,.jpg,.jpeg,.png" required>
+                            <label for="postmortemReport">Click to upload Postmortem Report</label>
+                            <div class="file-name" id="postmortemReportName">No file chosen</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Legal Heir Certificate(issued by RDO)</label>
+                        <div class="file-upload">
+                            <input type="file" id="legalHeirCertificate" name="legalHeirCertificate" accept=".pdf,.jpg,.jpeg,.png" required>
+                            <label for="legalHeirCertificate">Click to upload Legal Heir Certificate</label>
+                            <div class="file-name" id="legalHeirCertificateName">No file chosen</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Caste Certificate</label>
+                        <div class="file-upload">
+                            <input type="file" id="casteCertificate" name="casteCertificate" accept=".pdf,.jpg,.jpeg,.png" required>
+                            <label for="casteCertificate">Click to upload Caste Certificate</label>
+                            <div class="file-name" id="casteCertificateName">No file chosen</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Compensation Details Section -->
+            <div class="form-section">
+                <h2><span class="status-indicator status-pending"></span>Compensation & Rehabilitation Details</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="educationQualification">Education Qualification</label>
+                        <select id="educationQualification" name="educationQualification">
+                            <option value="">Select</option>
+                            <option value="illiterate">Illiterate</option>
+                            <option value="primary">Primary School</option>
+                            <option value="secondary">Secondary School</option>
+                            <option value="higher_secondary">Higher Secondary</option>
+                            <option value="graduate">Graduate</option>
+                            <option value="post_graduate">Post Graduate</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="jobAssigned">Job Assigned (if any)</label>
+                        <select id="jobAssigned" name="jobAssigned">
+                            <option value="">Select</option>
+                            <option value="not assigned">not assigned</option>
+                            <option value="junior assistant">junior assistant</option>
+                            <option value="worker">worker</option>
+                            <!-- <option value="higher_secondary">Higher Secondary</option>
+                            <option value="graduate">Graduate</option>
+                            <option value="post_graduate">Post Graduate</option> -->
+                        </select>                   
+                     </div>
+                    
+                    <div class="form-group">
+                        <label for="appointmentOrder">Appointment Order (if applicable)</label>
+                        <div class="file-upload">
+                            <input type="file" id="appointmentOrder" name="appointmentOrder" accept=".pdf,.jpg,.jpeg,.png">
+                            <label for="appointmentOrder">Click to upload Appointment Order</label>
+                            <div class="file-name" id="appointmentOrderName">No file chosen</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bankName" class="required">Bank Name</label>
+                        <input type="text" id="bankName" name="bankName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="accountNumber" class="required">Bank Account Number</label>
+                        <input type="text" id="accountNumber" name="accountNumber" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ifscCode" class="required">IFSC Code</label>
+                        <input type="text" id="ifscCode" name="ifscCode" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="compensationAmount">Compensation Amount (₹)</label>
+                        <select id="compensationAmount" name="compensationAmount">
+                            <option value="">Select</option>
+                            <option value="not assigned">not assigned</option>
+                            <option value="partially assigned">partially assigned(Rs.4,12,500)</option>
+                            <option value="fully assigned">fully assigned(Rs.8,25,000)</option>
+                            
+                        </select>                     
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="button" class="btn" id="saveDraftBtn">Save Draft</button>
+                <button type="submit" class="btn" id="submitBtn">Submit Application</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Display file names when files are selected
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+                document.getElementById(this.id + 'Name').textContent = fileName;
+            });
+        });
+        
+        // Form submission handling
+        document.getElementById('compensationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate form
+            const requiredFields = document.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    field.style.borderColor = 'red';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#ddd';
+                }
+            });
+            
+            if (!isValid) {
+                alert('Please fill all required fields marked with *');
+                return;
+            }
+            
+            // In a real application, you would send this data to the server
+            // For demonstration, we'll just show a success message
+            alert('Application submitted successfully! Case will be processed.');
+            
+            // Reset form
+            this.reset();
+            document.querySelectorAll('.file-name').forEach(el => {
+                el.textContent = 'No file chosen';
+            });
+        });
+        
+        // Save draft functionality
+        document.getElementById('saveDraftBtn').addEventListener('click', function() {
+            // In a real application, this would save to local storage or send to server
+            alert('Draft saved successfully! You can continue later.');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+{"case_id":"11","action":"forward_to_collector","collector_remarks":"fvqevf"}
+{"digital_signature":{"name":"Screenshot 2024-12-15 145819.png","full_path":"Screenshot 2024-12-15 145819.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php5EDA.tmp","error":0,"size":19789}}
+{"case_id":"11","action":"forward_to_social_welfare","collector_remarks":""}
+{"digital_signature":{"name":"fir_686624341df16 (1).png","full_path":"fir_686624341df16 (1).png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php2DE3.tmp","error":0,"size":19789}}
+{"case_id":"11","action":"forward_to_social_welfare","collector_remarks":"2r2vr1r"}
+{"digital_signature":{"name":"fir_686624341df16 (1).png","full_path":"fir_686624341df16 (1).png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php5E8.tmp","error":0,"size":19789}}
+{"case_id":"2","action":"forward_to_social_welfare","collector_remarks":"dwccd"}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php939C.tmp","error":0,"size":19789}}
+{"case_id":"14","action":"forward_to_social_welfare","collector_remarks":"no "}
+{"digital_signature":{"name":"fir_686624341df16 (1).png","full_path":"fir_686624341df16 (1).png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php9C80.tmp","error":0,"size":19789}}
+{"case_id":"14","action":"forward_to_collector"}
+[]
+{"case_id":"2","action":"forward_to_collector","collector_remarks":"ig"}
+[]
+{"case_id":"2","action":"forward_to_collector","collector_remarks":"ig"}
+[]
+{"case_id":"2","action":"forward_to_collector","collector_remarks":"ig"}
+[]
+{"case_id":"14","action":"forward_to_social_welfare","collector_remarks":"bvjgvhg"}
+{"digital_signature":{"name":"fir_686624341df16 (1).png","full_path":"fir_686624341df16 (1).png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\phpE6C0.tmp","error":0,"size":19789}}
+{"case_id":"14","action":"forward_to_collector","collector_remarks":"nbkjbb"}
+[]
+{"case_id":"16","action":"forward_to_collector","collector_remarks":"compensation is approved"}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php5722.tmp","error":0,"size":19789}}
+{"case_id":"16","action":"forward_to_collector","collector_remarks":"compensation is approved"}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php7123.tmp","error":0,"size":19789}}
+{"case_id":"15","action":"forward_to_social_welfare","collector_remarks":"no remarks"}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php3390.tmp","error":0,"size":19789}}
+{"case_id":"15","action":"forward_to_social_welfare","collector_remarks":""}
+{"digital_signature":{"name":"","full_path":"","type":"","tmp_name":"","error":4,"size":0}}
+SWD RECOMMEND INSERT: case_id=15, job_allocated=peon, recommendation=he is elgible for peon post at any category, comments=checked the details 
+{"case_id":"15","action":"forward_to_collector","collector_remarks":"no remakrks"}
+[]
+{"case_id":"15","action":"collector_allot","collector_comments":"yes allot it"}
+[]
+{"case_id":"16","action":"collector_reverify","collector_comments":"noo"}
+[]
+{"case_id":"16","action":"collector_approve","collector_comments":"yess"}
+[]
+{"case_id":"15","action":"collector_allot","collector_comments":"yess"}
+[]
+{"case_id":"17","action":"forward_to_collector","collector_remarks":"no remarks"}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php32E3.tmp","error":0,"size":19789}}
+{"case_id":"17","action":"forward_to_collector","collector_remarks":"no remarks"}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php4EB9.tmp","error":0,"size":19789}}
+{"case_id":"17","action":"forward_to_collector","collector_remarks":"no remarksjhugvugv"}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php7D79.tmp","error":0,"size":19789}}
+{"case_id":"17","action":"forward_to_collector","collector_remarks":"fevqefv"}
+{"digital_signature":{"name":"fir_686624341df16 (1).png","full_path":"fir_686624341df16 (1).png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\phpD18C.tmp","error":0,"size":19789}}
+{"case_id":"17","action":"collector_approve","collector_comments":"uhbgu"}
+[]
+{"case_id":"17","action":"forward_to_social_welfare","collector_remarks":"sdvv"}
+{"digital_signature":{"name":"","full_path":"","type":"","tmp_name":"","error":4,"size":0}}
+SWD RECOMMEND INSERT: case_id=17, job_allocated=typist, recommendation=he is elgible for peon post at any category, comments=hh h 
+{"case_id":"17","action":"forward_to_collector","collector_remarks":" huhu uhbu"}
+[]
+{"case_id":"19","action":"forward_to_collector","collector_remarks":"hvuvuy"}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\phpCD28.tmp","error":0,"size":19789}}
+{"case_id":"18","action":"forward_to_social_welfare","collector_remarks":"gvygytyct"}
+{"digital_signature":{"name":"fir_686624341df16 (1).png","full_path":"fir_686624341df16 (1).png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php26B3.tmp","error":0,"size":19789}}
+SWD RECOMMEND INSERT: case_id=18, job_allocated=peon, recommendation=he is elgible for peon post at any category, comments=jvygcytc
+{"case_id":"18","action":"forward_to_collector","collector_remarks":"vytytc"}
+[]
+{"case_id":"18","action":"collector_allot","collector_comments":"gcyfcyfc"}
+[]
+{"case_id":"19","action":"collector_reverify","collector_comments":"vgvygcy"}
+[]
+{"case_id":"23","action":"forward_to_social_welfare","collector_remarks":""}
+{"digital_signature":{"name":"resume (3).pdf","full_path":"resume (3).pdf","type":"application\/pdf","tmp_name":"C:\\xampp\\tmp\\phpBB3B.tmp","error":0,"size":293156}}
+SWD RECOMMEND INSERT: case_id=23, job_allocated=peon, recommendation=he is elgible for peon post at any category, comments=bhuh
+{"case_id":"23","action":"forward_to_collector","collector_remarks":",ihbuhv"}
+[]
+{"case_id":"23","action":"collector_allot","collector_comments":"uhygvyg"}
+[]
+{"case_id":"24","action":"forward_to_collector","collector_remarks":"vhghg"}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php72D8.tmp","error":0,"size":19789}}
+{"case_id":"25","action":"forward_to_social_welfare","collector_remarks":"hgchchgc"}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\phpAF3B.tmp","error":0,"size":19789}}
+SWD RECOMMEND INSERT: case_id=25, job_allocated=typist, recommendation=he is elgible for peon post at any category, comments=b hgchg
+{"case_id":"25","action":"forward_to_collector","collector_remarks":"vhghgc"}
+[]
+{"case_id":"24","action":"collector_approve","collector_comments":"b hghg hg "}
+[]
+{"case_id":"25","action":"collector_reverify","collector_comments":" hghg "}
+[]
+{"case_id":"27","action":"forward_to_collector","collector_remarks":"no remarks "}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php3F4E.tmp","error":0,"size":19789}}
+{"case_id":"27","action":"collector_approve","collector_comments":"approved "}
+[]
+{"case_id":"26","action":"forward_to_social_welfare","collector_remarks":"no remaeks "}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\phpC715.tmp","error":0,"size":19789}}
+SWD RECOMMEND INSERT: case_id=26, job_allocated=peon, recommendation=he is elgible for peon post at any category, comments=no comments
+{"case_id":"28","action":"forward_to_social_welfare","collector_remarks":"dxgf"}
+{"digital_signature":{"name":"fir_686624341df16.png","full_path":"fir_686624341df16.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\php45ED.tmp","error":0,"size":19789}}
+SWD RECOMMEND INSERT: case_id=28, job_allocated=clerk, recommendation=he is elgible for peon post at any category, comments=qsdfghj
+{"case_id":"28","action":"forward_to_collector","collector_remarks":"sdfghk\/"}
+[]
+{"case_id":"28","action":"collector_reverify","collector_comments":"ertyuio;'"}
+[]
+{"case_id":"29","action":"forward_to_collector","collector_remarks":"noo"}
+{"digital_signature":{"name":"preprocessed_for_ocr.png","full_path":"preprocessed_for_ocr.png","type":"image\/png","tmp_name":"C:\\xampp\\tmp\\phpFDE3.tmp","error":0,"size":208122}}
+{"case_id":"29","action":"collector_approve","collector_comments":"noo"}
+[]
+{"case_id":"30","action":"forward_to_social_welfare","collector_remarks":""}
+{"digital_signature":{"name":"","full_path":"","type":"","tmp_name":"","error":4,"size":0}}
+{"case_id":"31","action":"forward_to_social_welfare","collector_remarks":""}
+{"digital_signature":{"name":"","full_path":"","type":"","tmp_name":"","error":4,"size":0}}
+{"case_id":"31","action":"forward_to_collector","collector_remarks":"uhuug u"}
+[]
+{"case_id":"31","action":"collector_approve","collector_comments":"jh uhu u u "}
+[]
+{"case_id":"32","action":"forward_to_social_welfare","collector_remarks":""}
+{"digital_signature":{"name":"","full_path":"","type":"","tmp_name":"","error":4,"size":0}}
+SWD RECOMMEND INSERT: case_id=32, job_allocated=clerk, recommendation=noo, comments=njnnijn
+{"case_id":"33","action":"forward_to_social_welfare","collector_remarks":"no"}
+{"digital_signature":{"name":"","full_path":"","type":"","tmp_name":"","error":4,"size":0}}
+{"case_id":"33","action":"forward_to_collector","collector_remarks":"nooo"}
+[]
+{"case_id":"33","action":"collector_approve","collector_comments":"noo allot and approve"}
+[]

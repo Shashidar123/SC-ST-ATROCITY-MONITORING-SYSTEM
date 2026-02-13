@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SC/ST Atrocity Case Portal | Government of India</title>
+    <style>
+        /* CSS Styles */
+        :root {
+            --primary-color: #0a4a7a;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ff6b35;
+            --text-color: #333;
+            --white: #fff;
+            --light-gray: #e9ecef;
+            --dark-gray: #495057;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 1rem;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav ul li a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(10, 74, 122, 0.8), rgba(10, 74, 122, 0.8)), 
+                        url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e05a2b;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            margin-left: 1rem;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .rules-container {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+        }
+        
+        .rules-list {
+            margin-top: 1.5rem;
+        }
+        
+        .rules-list h4 {
+            color: var(--primary-color);
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        .rules-list ul {
+            margin-left: 1.5rem;
+        }
+        
+        .rules-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png" alt="Government of India Logo">
+                <div class="logo-text">
+                    <h1>SC/ST Atrocity Case Portal</h1>
+                    <p>Government of India | Developed by NIC</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#rules">Rules & Guidelines</a></li>
+                    <li><a href="complaint.html">File a Case</a></li>
+                    <li><a href="#track">Track Case</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Protection of Civil Rights for SC/ST Communities</h2>
+            <p>File complaints regarding atrocities against Scheduled Castes and Scheduled Tribes as per The Scheduled Castes and the Scheduled Tribes (Prevention of Atrocities) Act, 1989</p>
+            <a href="complaint.html" class="btn" id="file-case-btn">File a Case</a>
+            <a href="#rules" class="btn btn-secondary">Learn More</a>
+        </div>
+    </section>
+    
+    <div class="container">
+        <section id="features">
+            <h2 class="section-title">Our Services</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>File Complaints</h3>
+                    <p>Register complaints regarding atrocities against SC/ST communities through our secure online portal.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Legal Assistance</h3>
+                    <p>Get connected with legal aid and support services for victims of caste-based discrimination.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Track Cases</h3>
+                    <p>Monitor the status of your filed complaints and receive updates on investigation progress.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="rules">
+            <h2 class="section-title">Rules & Guidelines (GMOs)</h2>
+            <div class="rules-container">
+                <p>The following rules and guidelines are issued by Government Monitoring Organizations (GMOs) through National Informatics Centre (NIC) for filing SC/ST atrocity cases:</p>
+                
+                <div class="rules-list">
+                    <h4>The Scheduled Castes and the Scheduled Tribes (Prevention of Atrocities) Act, 1989</h4>
+                    <ul>
+                        <li>The Act prohibits commission of offences against members of SC/ST communities</li>
+                        <li>Provides for special courts for trial of such offences and relief for victims</li>
+                        <li>Mandates immediate registration of FIR for offences under the Act</li>
+                        <li>Provides for rights of victims and witnesses</li>
+                    </ul>
+                    
+                    <h4>Eligibility for Filing Complaint</h4>
+                    <ul>
+                        <li>Victim or family member of victim belonging to SC/ST community</li>
+                        <li>Any person who has knowledge of the offence can file a complaint</li>
+                        <li>Public servant who comes to know about the offence in discharge of official duties</li>
+                    </ul>
+                    
+                    <h4>Required Documents</h4>
+                    <ul>
+                        <li>Identity proof of complainant (Aadhaar, Voter ID, etc.)</li>
+                        <li>Caste certificate of victim (if available)</li>
+                        <li>Any evidence related to the incident (photos, videos, medical reports, etc.)</li>
+                        <li>Witness statements (if available)</li>
+                    </ul>
+                    
+                    <h4>Procedure After Filing</h4>
+                    <ul>
+                        <li>FIR must be registered immediately (within 24 hours)</li>
+                        <li>Investigation must be completed within 60 days</li>
+                        <li>Charge sheet must be filed within 60 days of FIR registration</li>
+                        <li>Trial must be completed within 2 months from filing of charge sheet</li>
+                    </ul>
+                    
+                    <h4>Relief and Rehabilitation Measures</h4>
+                    <ul>
+                        <li>Immediate relief in cash or kind to victims</li>
+                        <li>Payment of transportation costs for medical attention</li>
+                        <li>Maintenance allowance for victim and dependents</li>
+                        <li>Pension to widows or dependents in case of death</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#rules">Rules</a>
+                <a href="complaint.html">File Case</a>
+                <a href="#track">Track Case</a>
+                <a href="#contact">Contact</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Use</a>
+            </div>
+            <p class="copyright">© 2023 SC/ST Atrocity Case Portal. Developed by National Informatics Centre (NIC).</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SP Office | SC/ST Atrocity Case Management</title>
+    <style>
+        :root {
+            --police-blue: #0a4a7a;
+            --police-dark-blue: #08315a;
+            --police-light: #e9f2f9;
+            --police-white: #ffffff;
+            --police-dark: #333333;
+            --police-gray: #e0e0e0;
+            --collector-green: #2e7d32;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--police-light);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--police-dark-blue), var(--police-blue));
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .badge {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--police-blue);
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid gold;
+        }
+
+        .header-actions button {
+            background-color: var(--police-red);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Main Layout */
+        .container {
+            display: flex;
+            min-height: calc(100vh - 82px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            padding: 1.5rem;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--police-dark);
+            text-decoration: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: var(--police-light);
+            color: var(--police-blue);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .case-id {
+            background-color: var(--police-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        /* Case Sections */
+        .case-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: var(--police-blue);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--police-gray);
+        }
+
+        /* Detail Cards */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .detail-card {
+            background-color: var(--police-light);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .detail-row {
+            display: flex;
+            margin-bottom: 0.8rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            width: 150px;
+            color: var(--police-dark);
+        }
+
+        .detail-value {
+            flex: 1;
+        }
+
+        /* Evidence Grid */
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .evidence-item {
+            border: 1px solid var(--police-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .evidence-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .evidence-doc {
+            width: 100%;
+            height: 150px;
+            background-color: var(--police-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--police-blue);
+        }
+
+        .evidence-caption {
+            padding: 0.5rem;
+            text-align: center;
+            background-color: var(--police-gray);
+        }
+
+        /* Action Section */
+        .action-section {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--police-gray);
+            border-radius: 4px;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--police-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--police-dark-blue);
+        }
+
+        .btn-success {
+            background-color: var(--collector-green);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #1b5e20;
+        }
+
+        /* Collector Section */
+        .collector-section {
+            background-color: #e8f5e9;
+            border-left: 4px solid var(--collector-green);
+        }
+
+        .collector-title {
+            color: var(--collector-green);
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+
+        .status-active {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .status-completed {
+            background-color: #e8f5e9;
+            color: var(--collector-green);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-title">
+            <div class="badge">SP</div>
+            <div>
+                <h1>Superintendent of Police Dashboard</h1>
+                <p>SC/ST Atrocity Case Management System</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="user-profile">
+                <h3>SP Rajesh Kumar</h3>
+                <p>District: Krishna Nagar</p>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="SP_dashboard.html"><i class="fas fa-list"></i> All Cases</a></li>
+                <li><a href="#"><i class="fas fa-user-shield"></i> Officer Assignment</a></li>
+                <li><a href="#"><i class="fas fa-file-export"></i> Collector Reports</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Case Header -->
+            <div class="case-header">
+                <h2>Case Details</h2>
+                <div class="case-id">Case ID: SCST/2023/0145</div>
+            </div>
+
+            <!-- Case Information -->
+            <div class="case-section">
+                <h3 class="section-title">Case Information</h3>
+                <div class="detail-grid">
+                    <div class="detail-card">
+                        <div class="detail-row">
+                            <div class="detail-label">FIR Number:</div>
+                            <div class="detail-value">FIR-125/2023</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Police Station:</div>
+                            <div class="detail-value">Krishna Nagar South</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Registration Date:</div>
+                            <div class="detail-value">15-10-2023 14:30</div>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-row">
+                            <div class="detail-label">Current Status:</div>
+                            <div class="detail-value">
+                                <span class="status-badge status-active">Under Investigation</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Assigned IO:</div>
+                            <div class="detail-value">Insp. Anjali Patil (SC/ST Cell)</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Last Updated:</div>
+                            <div class="detail-value">18-10-2023 10:15</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Victim Details -->
+            <div class="case-section">
+                <h3 class="section-title">Victim Details</h3>
+                <div class="detail-grid">
+                    <div class="detail-card">
+                        <div class="detail-row">
+                            <div class="detail-label">Full Name:</div>
+                            <div class="detail-value">Suresh Kumar</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Age/Gender:</div>
+                            <div class="detail-value">28 / Male</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Caste:</div>
+                            <div class="detail-value">Scheduled Caste (SC)</div>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-row">
+                            <div class="detail-label">Contact:</div>
+                            <div class="detail-value">+91 98765XXXXX</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Aadhaar:</div>
+                            <div class="detail-value">XXXX-XXXX-7890</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Address:</div>
+                            <div class="detail-value">H.No 45, Gandhi Nagar, Krishna Nagar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Incident Details -->
+            <div class="case-section">
+                <h3 class="section-title">Incident Details</h3>
+                <div class="detail-card">
+                    <div class="detail-row">
+                        <div class="detail-label">Date & Time:</div>
+                        <div class="detail-value">14-10-2023, 18:45</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Location:</div>
+                        <div class="detail-value">Near Gandhi Chowk, Krishna Nagar</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Sections Applied:</div>
+                        <div class="detail-value">IPC 354, SC/ST Act 3(1)(x), 3(2)(v)</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Victim Statement:</div>
+                        <div class="detail-value">
+                            "On 14th October at 6:45 PM, I was returning from work when 3 men from upper caste community stopped me near Gandhi Chowk. They called me by my caste name and said 'You people should not walk on this road'. When I protested, they pushed me and tore my shirt. I fell down and they kicked me before leaving."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evidence Section -->
+            <div class="case-section">
+                <h3 class="section-title">Evidence & Documents</h3>
+                <div class="evidence-grid">
+                    <div class="evidence-item">
+                        <div class="evidence-doc">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="evidence-caption">FIR Copy</div>
+                    </div>
+                    <div class="evidence-item">
+                        <img src="https://via.placeholder.com/300x200?text=Medical+Report" class="evidence-img" alt="Medical Report">
+                        <div class="evidence-caption">Medical Report</div>
+                    </div>
+                    <div class="evidence-item">
+                        <img src="https://via.placeholder.com/300x200?text=Injury+Photo" class="evidence-img" alt="Injury Photo">
+                        <div class="evidence-caption">Injury Photos</div>
+                    </div>
+                    <div class="evidence-item">
+                        <div class="evidence-doc">
+                            <i class="fas fa-file-audio"></i>
+                        </div>
+                        <div class="evidence-caption">Victim Statement (Audio)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SP Actions Section -->
+            <div class="case-section">
+                <h3 class="section-title">SP Office Actions</h3>
+                <div class="form-group">
+                    <label>Assign/Change Investigating Officer</label>
+                    <select>
+                        <option value="">Select Officer</option>
+                        <option value="io1" selected>Insp. Anjali Patil (SC/ST Cell)</option>
+                        <option value="io2">DSP Rajesh Verma (CID)</option>
+                        <option value="io3">Insp. Mahesh Reddy (Local)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Evidence Verification Status</label>
+                    <select>
+                        <option value="pending">Pending Verification</option>
+                        <option value="partial" selected>Partially Verified</option>
+                        <option value="complete">Fully Verified</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>SP Remarks</label>
+                    <textarea placeholder="Enter your comments on the case...">Medical reports confirm injuries consistent with victim's statement. CCTV footage from nearby shop being collected.</textarea>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-primary"><i class="fas fa-save"></i> Update Case</button>
+                    <button class="btn btn-success"><i class="fas fa-check-circle"></i> Finalize Investigation</button>
+                </div>
+            </div>
+
+            <!-- Collector Office Section -->
+            <div class="case-section collector-section">
+                <h3 class="section-title collector-title">Collector Office Section</h3>
+                <div class="detail-card">
+                    <div class="detail-row">
+                        <div class="detail-label">Collector Remarks:</div>
+                        <div class="detail-value">Case marked for priority hearing. Victim compensation initiated.</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Compensation Status:</div>
+                        <div class="detail-value">
+                            <span class="status-badge status-pending">Pending Disbursement</span>
+                        </div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Next Hearing Date:</div>
+                        <div class="detail-value">25-11-2023</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>SP Comments for Collector</label>
+                    <textarea placeholder="Enter any special remarks for the Collector's office...">Request expedited compensation processing due to severity of injuries. Case has strong evidence.</textarea>
+                </div>
+                <button class="btn btn-success"><i class="fas fa-paper-plane"></i> Send to Collector Office</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update status when Finalize button is clicked
+            const finalizeBtn = document.querySelector('.btn-success');
+            finalizeBtn.addEventListener('click', function() {
+                if(confirm('Are you sure you want to finalize this case? This action cannot be undone.')) {
+                    alert('Case finalized successfully! Now being forwarded to Collector Office.');
+                    // In real implementation, would update status in backend
+                }
+            });
+
+            // Simulate sending to Collector Office
+            const sendToCollectorBtn = document.querySelector('.collector-section .btn');
+            sendToCollectorBtn.addEventListener('click', function() {
+                alert('Case details and SP remarks successfully sent to Collector Office.');
+            });
+        });
+    </script>
+</body>
+</html>

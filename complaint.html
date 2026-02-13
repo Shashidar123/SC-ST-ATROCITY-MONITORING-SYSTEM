@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Dept | SC/ST Atrocity Case Filing</title>
+    <style>
+        /* Police Department Styling */
+        :root {
+            --police-blue: #0a4a7a;
+            --police-light: #e9f2f9;
+            --police-red: #d32f2f;
+            --police-white: #ffffff;
+            --police-dark: #333333;
+            --police-gray: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--police-light);
+            color: var(--police-dark);
+        }
+
+        /* Header with Police Badge */
+        header {
+            background-color: var(--police-blue);
+            color: var(--police-white);
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .police-badge {
+            width: 50px;
+            height: 50px;
+            background-color: var(--police-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--police-blue);
+            font-weight: bold;
+            border: 2px solid gold;
+        }
+
+        .header-title h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .header-title p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Main Form Container */
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: var(--police-white);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            color: var(--police-blue);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--police-gray);
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--police-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--police-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* File Upload Section */
+        .file-upload {
+            border: 2px dashed var(--police-gray);
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--police-blue);
+            background-color: var(--police-light);
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .file-upload-label {
+            display: block;
+            cursor: pointer;
+        }
+
+        .file-upload-icon {
+            font-size: 2rem;
+            color: var(--police-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Sections for FIR, Medical, Evidence */
+        .case-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--police-light);
+            border-radius: 8px;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background-color: var(--police-blue);
+            color: var(--police-white);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background-color: #083b63;
+        }
+
+        /* Modal for Submission */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--police-white);
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal h3 {
+            color: var(--police-blue);
+            margin-bottom: 1rem;
+        }
+
+        .modal p {
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            background-color: var(--police-blue);
+            color: var(--police-white);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Police Department Header -->
+    <header>
+        <div class="header-container">
+            <div class="police-badge">PD</div>
+            <div class="header-title">
+                <h1>SC/ST Atrocity Case Filing System</h1>
+                <p>Police Department | Immediate FIR Registration</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Form Container -->
+    <div class="container">
+        <h2 class="section-title">File New SC/ST Atrocity Case</h2>
+        
+        <!-- Victim Basic Details -->
+        <div class="case-section">
+            <h3 class="section-title">Victim Details</h3>
+            <form action="handlers/submit_case.php" method="POST" enctype="multipart/form-data" id="police-case-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="victim-name">Victim's Full Name*</label>
+                        <input type="text" id="victim-name" name="victim_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="victim-age">Age*</label>
+                        <input type="number" id="victim-age" name="victim_age" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="victim-gender">Gender*</label>
+                        <select id="victim-gender" name="victim_gender" required>
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="transgender">Transgender</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="victim-caste">Caste Category*</label>
+                        <select id="victim-caste" name="victim_caste" required>
+                            <option value="">Select</option>
+                            <option value="sc">Scheduled Caste (SC)</option>
+                            <option value="st">Scheduled Tribe (ST)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="victim-address">Full Address*</label>
+                    <textarea id="victim-address" name="victim_address" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="victim-contact">Contact Number*</label>
+                        <input type="tel" id="victim-contact" name="victim_contact" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="victim-aadhaar">Aadhaar Number (if available)</label>
+                        <input type="text" id="victim-aadhaar" name="victim_aadhaar">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- FIR Details -->
+        <div class="case-section">
+            <h3 class="section-title">FIR Registration</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fir-number">FIR Number*</label>
+                    <input type="text" id="fir-number" name="fir_number" required>
+                </div>
+                <div class="form-group">
+                    <label for="fir-date">FIR Registration Date*</label>
+                    <input type="date" id="fir-date" name="fir_date" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="police-station">Police Station*</label>
+                <input type="text" id="police-station" name="police_station" required>
+            </div>
+            <div class="form-group">
+                <label>Upload FIR Copy (PDF/Image)*</label>
+                <div class="file-upload">
+                    <input type="file" id="fir-upload" name="fir_upload" accept=".pdf,.jpg,.jpeg,.png" required>
+                    <label for="fir-upload" class="file-upload-label">
+                        <div class="file-upload-icon">📄</div>
+                        <p>Click to upload FIR document</p>
+                        <p>Max 5MB | PDF, JPG, PNG</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Priority & Assigned Officer -->
+        <div class="case-section">
+            <h3 class="section-title">Case Assignment</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="priority">Priority*</label>
+                    <select id="priority" name="priority" required>
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assigned-officer">Assigned Officer*</label>
+                    <input type="text" id="assigned-officer" name="assigned_officer" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- Victim's Statement (Verbatim) -->
+        <div class="case-section">
+            <h3 class="section-title">Victim's Statement (Verbatim)</h3>
+            <div class="form-group">
+                <label for="victim-statement">Record Victim's Statement Word-for-Word*</label>
+                <textarea id="victim-statement" name="victim_statement" placeholder="Record the victim's exact words in their own language..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Upload Victim's Audio/Video Statement (Optional)</label>
+                <div class="file-upload">
+                    <input type="file" id="statement-media" name="statement_media" accept=".mp3,.mp4,.wav">
+                    <label for="statement-media" class="file-upload-label">
+                        <div class="file-upload-icon">🎤</div>
+                        <p>Click to upload audio/video recording</p>
+                        <p>Max 10MB | MP3, MP4, WAV</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medical Examination & Evidence -->
+        <div class="case-section">
+            <h3 class="section-title">Medical Examination & Evidence</h3>
+            <div class="form-group">
+                <label for="medical-report">Medical Examination Report Summary*</label>
+                <textarea id="medical-report" name="medical_report" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Upload Medical Reports*</label>
+                <div class="file-upload">
+                    <input type="file" id="medical-upload" name="medical_upload" accept=".pdf,.jpg,.jpeg,.png" required>
+                    <label for="medical-upload" class="file-upload-label">
+                        <div class="file-upload-icon">🏥</div>
+                        <p>Click to upload medical documents</p>
+                        <p>Max 5MB each</p>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Upload Other Evidence (Photos, Videos, etc.)</label>
+                <div class="file-upload">
+                    <input type="file" id="evidence-upload" name="evidence_upload[]" accept=".jpg,.jpeg,.png,.mp4" multiple>
+                    <label for="evidence-upload" class="file-upload-label">
+                        <div class="file-upload-icon">🔍</div>
+                        <p>Click to upload evidence files</p>
+                        <p>Max 10MB total</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sections Applied & SP Forwarding -->
+        <div class="case-section">
+            <h3 class="section-title">Legal Sections & Forwarding</h3>
+            <div class="form-group">
+                <label for="case-sections">Sections Applied (IPC & SC/ST Act)*</label>
+                <textarea id="case-sections" name="case_sections" placeholder="Example: IPC 354, SC/ST Act Section 3(1)(x)..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="investigating-officer">Investigating Officer Name & Rank*</label>
+                <input type="text" id="investigating-officer" name="investigating_officer" required>
+            </div>
+            <div class="form-checkbox">
+                <input type="checkbox" id="forward-to-sp" name="forward_to_sp" checked>
+                <label for="forward-to-sp">Forward case to SP Office immediately</label>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn" id="submit-case">Submit Case</button>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <h3>Case Successfully Registered!</h3>
+            <p>The SC/ST atrocity case has been filed and forwarded to the SP Office.</p>
+            <p><strong>Case Reference ID: <span id="case-ref-id">SCST-PD-2023-00125</span></strong></p>
+            <p>An SMS alert has been sent to the victim.</p>
+            <button class="close-modal" id="close-modal">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Form Submission Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const submitBtn = document.getElementById('submit-case');
+            const successModal = document.getElementById('success-modal');
+            const closeModal = document.getElementById('close-modal');
+
+            // Generate random case ID
+            function generateCaseID() {
+                const year = new Date().getFullYear();
+                const randomNum = Math.floor(100 + Math.random() * 900);
+                return `SCST-PD-${year}-${randomNum}`;
+            }
+
+            // Submit Case
+            submitBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Generate case reference ID
+                const caseID = generateCaseID();
+                document.getElementById('case-ref-id').textContent = caseID;
+                
+                // Show success modal
+                successModal.style.display = 'flex';
+            });
+
+            // Close Modal
+            closeModal.addEventListener('click', function() {
+                successModal.style.display = 'none';
+                // Reset form (optional)
+                document.getElementById('police-case-form').reset();
+            });
+        });
+    </script>
+</body>
+</html>
